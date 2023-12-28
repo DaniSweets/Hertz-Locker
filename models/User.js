@@ -35,6 +35,11 @@ User.init(
         len: [8],
       },
     },
+    role: {
+      type: DataTypes.ENUM('manager', 'client'), 
+      allowNull: false,
+      defaultValue: 'client', // Set a default role 
+    },
   },
   {
     hooks: {
