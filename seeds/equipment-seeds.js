@@ -1,4 +1,4 @@
-const { Equipment } = require('../models');
+const { Equipment } = require('../models/equipment');
 
 const equipmentData = [
   {

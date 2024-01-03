@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Equipment = require('../models/equipment');
+const Equipment = require('../../../models/equipment');
 
 // Route to fetch available equipment for users
 
