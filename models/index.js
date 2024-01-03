@@ -1,13 +1,31 @@
-const User = require('./User');
-const Project = require('./Project');
+const Equipment = require('./equipment');
+const Reservation = require('./reservation');
+const User = require('./user');
 
-User.hasMany(Project, {
-  foreignKey: 'user_id',
+// Define associations between models if needed
+// If a reservation belongs to a user
+User.hasMany(Reservation, {
+  foreignKey: 'userId',
   onDelete: 'CASCADE'
 });
 
-Project.belongsTo(User, {
-  foreignKey: 'user_id'
+Reservation.belongsTo(User, {
+  foreignKey: 'userId',
 });
 
-module.exports = { User, Project };
+// If a reservation is associated with equipment
+Equipment.hasMany(Reservation, {
+  foreignKey: 'equipmentId',
+});
+
+Reservation.belongsTo(Equipment, {
+  foreignKey: 'equipmentId',
+});
+
+// Export the models 
+
+module.exports = {
+  Equipment,
+  Reservation,
+  User,
+};
