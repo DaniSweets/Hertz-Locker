@@ -3,7 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const routes = require('./controllers/homeRoutes');
-const equipmentRoutes = require('./routes/api/equipmentRoutes'); 
+const equipmentRoutes = require('./controllers/api/manager/equipmentRoutes'); 
 const helpers = require('./utils/helpers');
 
 const sequelize = require('./config/connection');
