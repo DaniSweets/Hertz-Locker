@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { User } = require('../models');
+const { User } = require('../models/User');
 const bcrypt = require('bcrypt');
 
 exports.authenticateUser = async (req, res) => {

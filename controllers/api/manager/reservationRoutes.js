@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../utils/connection');
-const reservation = require('../../../models/reservation');
+const reservation = require('../models/reservation');
 
 const Reservation = sequelize.define('Reservation', {
   id: {

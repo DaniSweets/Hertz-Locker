@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Gig } = require('../models');
+const reservation = require('../models/reservation');
 
 // Middleware to check if the user is authenticated
 
@@ -26,7 +26,7 @@ const isManager = (req, res, next) => {
 
 router.get('/all-gigs', isManager, async (req, res) => {
   try {
-    const allGigs = await Gig.findAll();
+    const allGigs = await reservation.findAll();
     res.json(allGigs);
   } catch (error) {
     console.error('Error fetching all gigs from the database:', error);
@@ -55,7 +55,7 @@ router.post('/add-gig', isAuthenticated, async (req, res) => {
   const userId = req.user.id; // Assuming user ID is stored in req.user
 
   try {
-    const newGig = await Gig.create({ title, description, date, userId });
+    const newGig = await reservation.create({ title, description, date, userId });
     res.json(newGig);
   } catch (error) {
     console.error('Error adding a new gig to the database:', error);
@@ -69,7 +69,7 @@ router.delete('/delete-gig/:id', isManager, async (req, res) => {
   const gigId = req.params.id;
 
   try {
-    await Gig.destroy({ where: { id: gigId } });
+    await reservation.destroy({ where: { id: gigId } });
     res.json({ message: 'Gig deleted successfully' });
   } catch (error) {
     console.error('Error deleting the gig from the database:', error);
