@@ -23,7 +23,32 @@ const Equipment = sequelize.define('Equipment', {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  // What other fields are we wanting to add?????????????????????
+
+    // Manufacturer of the equipment
+    manufacturer: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+  
+    // Purchase date of the equipment
+    purchaseDate: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+  
+    // Condition of the equipment (e.g., new, used, refurbished)
+    condition: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+  
+    // Additional details or notes about the equipment
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+
+  ////////////////////////////// What other fields are we wanting to add?????????????????????
 
   // Timestamps for tracking creation and update times
   createdAt: {

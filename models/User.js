@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 
 class User extends Model {
+  // Method to check the entered password against the hashed password in the database
   checkPassword(loginPw) {
     return bcrypt.compareSync(loginPw, this.password);
   }
@@ -10,6 +11,7 @@ class User extends Model {
 
 User.init(
   {
+    // Define the user model attributes
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -36,28 +38,32 @@ User.init(
       },
     },
     role: {
+      // Define a role field with ENUM values ('manager' and 'client')
       type: DataTypes.ENUM('manager', 'client'), 
       allowNull: false,
-      defaultValue: 'client', // Set a default role 
+      defaultValue: 'client', // Set a default role to 'client' if not specified
     },
   },
   {
+    // Hooks for executing actions before creating or updating a user
     hooks: {
+      // Hash the user's password before creating a new user
       beforeCreate: async (newUserData) => {
         newUserData.password = await bcrypt.hash(newUserData.password, 10);
         return newUserData;
       },
+      // Hash the user's password before updating an existing user
       beforeUpdate: async (updatedUserData) => {
         updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
         return updatedUserData;
       },
     },
-    sequelize,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'user',
+    sequelize, // Connect to the Sequelize instance
+    timestamps: false, // Disable timestamps (createdAt and updatedAt)
+    freezeTableName: true, // Use the same table name as the model name
+    underscored: true, 
+    modelName: 'user', // Set the model name
   }
 );
 
-module.exports = User;
+module.exports = User; // Export the User model for use in other files

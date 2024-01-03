@@ -3,6 +3,7 @@ const router = express.Router();
 const { Gig } = require('../models');
 
 // Middleware to check if the user is authenticated
+
 const isAuthenticated = (req, res, next) => {
   if (req.user) {
     next();
@@ -12,6 +13,7 @@ const isAuthenticated = (req, res, next) => {
 };
 
 // Middleware to check if the user is a manager
+
 const isManager = (req, res, next) => {
   if (req.user && req.user.role === 'manager') {
     next();
@@ -21,6 +23,7 @@ const isManager = (req, res, next) => {
 };
 
 // Route for fetching all gigs (accessible only by managers)
+
 router.get('/all-gigs', isManager, async (req, res) => {
   try {
     const allGigs = await Gig.findAll();
@@ -32,6 +35,7 @@ router.get('/all-gigs', isManager, async (req, res) => {
 });
 
 // Route for fetching personal gigs (accessible by both managers and clients)
+
 router.get('/personal-gigs', isAuthenticated, async (req, res) => {
   const userId = req.user.id; // Assuming user ID is stored in req.user
 
@@ -45,6 +49,7 @@ router.get('/personal-gigs', isAuthenticated, async (req, res) => {
 });
 
 // Route for adding a new gig (accessible by both managers and clients)
+
 router.post('/add-gig', isAuthenticated, async (req, res) => {
   const { title, description, date } = req.body;
   const userId = req.user.id; // Assuming user ID is stored in req.user
@@ -59,6 +64,7 @@ router.post('/add-gig', isAuthenticated, async (req, res) => {
 });
 
 // Route for deleting a gig (accessible only by managers)
+
 router.delete('/delete-gig/:id', isManager, async (req, res) => {
   const gigId = req.params.id;
 

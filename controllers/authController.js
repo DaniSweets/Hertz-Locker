@@ -1,3 +1,5 @@
+const express = require('express');
+const router = express.Router();
 const { User } = require('../models');
 const bcrypt = require('bcrypt');
 
@@ -13,10 +15,14 @@ exports.authenticateUser = async (req, res) => {
 
     // Check the user's role and return appropriate response
     if (user.role === 'manager') {
-      // Manager login logic
+
+      ///// Manager login logic
+
       res.json({ role: 'manager', message: 'Manager login successful' });
     } else if (user.role === 'client') {
-      // Client login logic
+
+      ///// Client login logic
+
       res.json({ role: 'client', message: 'Client login successful' });
     } else {
       res.status(401).json({ error: 'Invalid role' });
@@ -26,3 +32,5 @@ exports.authenticateUser = async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
+module.exports = router;

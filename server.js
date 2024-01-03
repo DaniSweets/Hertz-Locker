@@ -3,7 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const routes = require('./controllers');
-const equipmentRoutes = require('./routes/api/equipmentRoutes'); // Add this line
+const equipmentRoutes = require('./routes/api/equipmentRoutes'); 
 const helpers = require('./utils/helpers');
 
 const sequelize = require('./config/connection');
@@ -41,7 +41,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use(routes);
-app.use('/api/equipment', equipmentRoutes); // Use the equipment routes
+
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
