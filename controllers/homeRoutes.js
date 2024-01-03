@@ -1,82 +1,80 @@
-const router = require('express').Router();
-const { User } = require('../models');
-const withAuth = require('../utils/auth');
+const express = require('express');
+const router = express.Router();
+const reservation = require('../models/reservation');
 
-// router.get('/', async (req, res) => {
-//   try {
-//     // Get all projects and JOIN with user data
-//     const projectData = await Project.findAll({
-//       include: [
-//         {
-//           model: User,
-//           attributes: ['name'],
-//         },
-//       ],
-//     });
+// Middleware to check if the user is authenticated
 
-//     // Serialize data so the template can read it
-//     const projects = projectData.map((project) => project.get({ plain: true }));
+const isAuthenticated = (req, res, next) => {
+  if (req.user) {
+    next();
+  } else {
+    res.status(401).json({ error: 'Unauthorized' });
+  }
+};
 
-//     // Pass serialized data and session flag into template
-//     res.render('homepage', { 
-//       projects, 
-//       logged_in: req.session.logged_in 
-//     });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+// Middleware to check if the user is a manager
 
-// router.get('/project/:id', async (req, res) => {
-//   try {
-//     const projectData = await Project.findByPk(req.params.id, {
-//       include: [
-//         {
-//           model: User,
-//           attributes: ['name'],
-//         },
-//       ],
-//     });
+const isManager = (req, res, next) => {
+  if (req.user && req.user.role === 'manager') {
+    next();
+  } else {
+    res.status(403).json({ error: 'Forbidden' });
+  }
+};
 
-//     const project = projectData.get({ plain: true });
+// Route for fetching all gigs (accessible only by managers)
 
-//     res.render('project', {
-//       ...project,
-//       logged_in: req.session.logged_in
-//     });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+router.get('/all-gigs', isManager, async (req, res) => {
+  try {
+    const allGigs = await reservation.findAll();
+    res.json(allGigs);
+  } catch (error) {
+    console.error('Error fetching all gigs from the database:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
-// // Use withAuth middleware to prevent access to route
-// router.get('/profile', withAuth, async (req, res) => {
-//   try {
-//     // Find the logged in user based on the session ID
-//     const userData = await User.findByPk(req.session.user_id, {
-//       attributes: { exclude: ['password'] },
-//       include: [{ model: Project }],
-//     });
+// Route for fetching personal gigs (accessible by both managers and clients)
 
-//     const user = userData.get({ plain: true });
+router.get('/personal-gigs', isAuthenticated, async (req, res) => {
+  const userId = req.user.id; // Assuming user ID is stored in req.user
 
-//     res.render('profile', {
-//       ...user,
-//       logged_in: true
-//     });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+  try {
+    const personalGigs = await Gig.findAll({ where: { userId } });
+    res.json(personalGigs);
+  } catch (error) {
+    console.error('Error fetching personal gigs from the database:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
-// router.get('/login', (req, res) => {
-//   // If the user is already logged in, redirect the request to another route
-//   if (req.session.logged_in) {
-//     res.redirect('/profile');
-//     return;
-//   }
+// Route for adding a new gig (accessible by both managers and clients)
 
-//   res.render('login');
-// });
+router.post('/add-gig', isAuthenticated, async (req, res) => {
+  const { title, description, date } = req.body;
+  const userId = req.user.id; // Assuming user ID is stored in req.user
 
-// module.exports = router;
+  try {
+    const newGig = await reservation.create({ title, description, date, userId });
+    res.json(newGig);
+  } catch (error) {
+    console.error('Error adding a new gig to the database:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Route for deleting a gig (accessible only by managers)
+
+router.delete('/delete-gig/:id', isManager, async (req, res) => {
+  const gigId = req.params.id;
+
+  try {
+    await reservation.destroy({ where: { id: gigId } });
+    res.json({ message: 'Gig deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting the gig from the database:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+module.exports = router;
