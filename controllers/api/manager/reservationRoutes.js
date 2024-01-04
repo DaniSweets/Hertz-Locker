@@ -1,15 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { Reservation } = require('../models'); 
+const { Reservation } = require('../../../models/reservation');
+const authController = require('../../authController');
 
-// Middleware to check if the user is authenticated
-const isAuthenticated = (req, res, next) => {
-  if (req.user) {
-    next();
-  } else {
-    res.status(401).json({ error: 'Unauthorized' });
-  }
-};
 
 // Middleware to check if the user is a manager
 const isManager = (req, res, next) => {
@@ -21,7 +14,7 @@ const isManager = (req, res, next) => {
 };
 
 // Route for fetching all reservations (accessible only by managers)
-router.get('/all-reservations', isManager, async (req, res) => {
+router.get('/all-reservations', authController.authenticateUser, isManager, async (req, res) => {
   try {
     const allReservations = await Reservation.findAll();
     res.json(allReservations);
@@ -32,7 +25,7 @@ router.get('/all-reservations', isManager, async (req, res) => {
 });
 
 // Route for fetching personal reservations (accessible by both managers and clients)
-router.get('/personal-reservations', isAuthenticated, async (req, res) => {
+router.get('/personal-reservations', authController.authenticateUser, async (req, res) => {
   const userId = req.user.id; // Assuming user ID is stored in req.user
 
   try {
@@ -45,7 +38,7 @@ router.get('/personal-reservations', isAuthenticated, async (req, res) => {
 });
 
 // Route for adding a new reservation (accessible by both managers and clients)
-router.post('/add-reservation', isAuthenticated, async (req, res) => {
+router.post('/add-reservation', authController.authenticateUser, async (req, res) => {
   const { startTime, endTime, bandName, equipmentId, notes } = req.body;
   const userId = req.user.id; // Assuming user ID is stored in req.user
 
