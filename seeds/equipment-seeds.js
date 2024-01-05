@@ -1,4 +1,5 @@
-const { Equipment } = require('../models');
+const Equipment = require('../models/equipment');
+const sequelize = require('../config/connection');
 
 const equipmentData = [
   {

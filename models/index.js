@@ -1,6 +1,6 @@
 const Equipment = require('./equipment');
 const Reservation = require('./reservation');
-const User = require('./user');
+const User = require('./User');
 
 // Define associations between models if needed
 // If a reservation belongs to a user
