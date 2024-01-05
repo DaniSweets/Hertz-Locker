@@ -1,4 +1,5 @@
-const { Reservation } = require('../models/reservation');
+const Reservation = require('../models/reservation');
+const sequelize = require('../config/connection');
 
 const reservationData = [
   {
