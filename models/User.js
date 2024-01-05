@@ -9,7 +9,7 @@ class User extends Model {
   }
 }
 
-User.init(
+User = sequelize.define('User',
   {
     // Define the user model attributes
     id: {
