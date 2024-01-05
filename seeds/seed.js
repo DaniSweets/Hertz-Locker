@@ -4,7 +4,8 @@ const seedReservations = require('./reservation-seeds');
 const sequelize = require('../config/connection');
 
 const seedAll = async () => {
-  // await seedUsers();
+  await sequelize.sync({ force: true });
+  await seedUsers();
   await seedEquipment();
   await seedReservations();
   
