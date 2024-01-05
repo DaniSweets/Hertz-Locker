@@ -14,7 +14,7 @@ const isManager = (req, res, next) => {
 };
 
 // Route for fetching all reservations (accessible only by managers)
-router.get('/all-reservations', authController.authenticateUser, isManager, async (req, res) => {
+router.get('/all-reservations', authController, isManager, async (req, res) => {
   try {
     const allReservations = await Reservation.findAll();
     res.json(allReservations);
@@ -25,7 +25,7 @@ router.get('/all-reservations', authController.authenticateUser, isManager, asyn
 });
 
 // Route for fetching personal reservations (accessible by both managers and clients)
-router.get('/personal-reservations', authController.authenticateUser, async (req, res) => {
+router.get('/personal-reservations', authController, async (req, res) => {
   const userId = req.user.id; // Assuming user ID is stored in req.user
 
   try {
@@ -38,7 +38,7 @@ router.get('/personal-reservations', authController.authenticateUser, async (req
 });
 
 // Route for adding a new reservation (accessible by both managers and clients)
-router.post('/add-reservation', authController.authenticateUser, async (req, res) => {
+router.post('/add-reservation', authController, async (req, res) => {
   const { startTime, endTime, bandName, equipmentId, notes } = req.body;
   const userId = req.user.id; // Assuming user ID is stored in req.user
 

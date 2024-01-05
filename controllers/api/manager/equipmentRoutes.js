@@ -5,7 +5,7 @@ const authController = require('../../authController');
 
 
 // Route to fetch available equipment for users
-router.get('/available-equipment', authController.authenticateUser, async (req, res) => {
+router.get('/available-equipment', authController, async (req, res) => {
   try {
     // Check if authentication was successful
     if (req.user) {
@@ -23,7 +23,7 @@ router.get('/available-equipment', authController.authenticateUser, async (req, 
 });
 
 // Route to get all equipment
-router.get('/all-equipment', authController.authenticateUser, async (req, res) => {
+router.get('/all-equipment', authController, async (req, res) => {
   try {
     const allEquipment = await Equipment.findAll();
     res.json(allEquipment);
@@ -34,7 +34,7 @@ router.get('/all-equipment', authController.authenticateUser, async (req, res) =
 });
 
 // Route to update equipment
-router.put('/update/:id', authController.authenticateUser, async (req, res) => {
+router.put('/update/:id', authController, async (req, res) => {
   try {
     const { id } = req.params;
     const updatedEquipment = await Equipment.update(req.body, { where: { id } });
@@ -45,8 +45,8 @@ router.put('/update/:id', authController.authenticateUser, async (req, res) => {
   }
 });
 
-// Route to delete equipment
-router.delete('/delete/:id', authController.authenticateUser, async (req, res) => {
+// // Route to delete equipment
+router.delete('/delete/:id', authController, async (req, res) => {
   try {
     const { id } = req.params;
     await Equipment.destroy({ where: { id } });
@@ -58,7 +58,7 @@ router.delete('/delete/:id', authController.authenticateUser, async (req, res) =
 });
 
 // Route to add new equipment
-router.post('/add', authController.authenticateUser, async (req, res) => {
+router.post('/add', authController, async (req, res) => {
   try {
     const newEquipment = await Equipment.create(req.body);
     res.json(newEquipment);
@@ -68,8 +68,8 @@ router.post('/add', authController.authenticateUser, async (req, res) => {
   }
 });
 
-// Route to fetch inventory data
-router.get('/inventory', authController.authenticateUser, async (req, res) => {
+// // Route to fetch inventory data
+router.get('/inventory', authController, async (req, res) => {
   try {
     // Fetch and return inventory data
     const inventoryData = await Equipment.findAll();
