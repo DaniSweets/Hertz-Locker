@@ -1,9 +1,9 @@
+const { User } = require('../models/user');
+const bcrypt = require('bcrypt');
 const express = require('express');
 const router = express.Router();
-const { User } = require('../models/User');
-const bcrypt = require('bcrypt');
 
-exports.authenticateUser = async (req, res) => {
+const authenticateUser = async (req, res, next) => {
   const { username, password } = req.body;
 
   try {
@@ -13,24 +13,15 @@ exports.authenticateUser = async (req, res) => {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
-    // Check the user's role and return appropriate response
-    if (user.role === 'manager') {
+    // Attach the authenticated user to the request
+    req.user = user;
 
-      ///// Manager login logic
-
-      res.json({ role: 'manager', message: 'Manager login successful' });
-    } else if (user.role === 'client') {
-
-      ///// Client login logic
-
-      res.json({ role: 'client', message: 'Client login successful' });
-    } else {
-      res.status(401).json({ error: 'Invalid role' });
-    }
+    // Continue to the next middleware or route handler
+    next();
   } catch (error) {
     console.error('Error during authentication:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
-module.exports = router;
+module.exports = authenticateUser;
