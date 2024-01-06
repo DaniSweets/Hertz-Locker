@@ -20,6 +20,16 @@ const equipmentData = [
     description: 'HD projector for presentations',
   },
   // Where we add all of our equipment data etc etc---- these are just examples
+
+  {
+    name: '',
+    status: '',
+    model: '',
+    manufacturer: '',
+    purchaseDate: '',
+    condition: '',
+    description: '',
+  }
 ];
 
 const seedEquipment = () => Equipment.bulkCreate(equipmentData);
