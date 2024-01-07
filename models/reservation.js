@@ -52,6 +52,12 @@ const Reservation = sequelize.define('Reservation', {
     allowNull: false,
     defaultValue: DataTypes.NOW,
   },
-});
+},
+{
+  sequelize,
+  freezeTableName: true,
+  modelName: 'reservation'
+},
+);
 
 module.exports = Reservation;
