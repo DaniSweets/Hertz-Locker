@@ -82,7 +82,7 @@ const equipmentData = [
     manufacturer: 'RODE',
     purchaseDate: '2020-12-01',
     condition: 'new',
-    description: 'premium 15m (50ft) XLR cable',
+    description: 'premium m (50ft) XLR cable',
   },
   {
     name: '',
