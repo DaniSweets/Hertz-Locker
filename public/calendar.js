@@ -1,6 +1,6 @@
 const Calendar = require('@fullcalendar/core');
 const dayGridPlugin = require('@fullcalendar/daygrid');
-const Reservation = require('./reservation');
+const Reservation = require('../models/reservation');
 
 const allReservations = Reservation.findAll();
         console.log(allReservations);
@@ -16,6 +16,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
     calendar.render();
   });
-
-
-  
