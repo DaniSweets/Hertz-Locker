@@ -20,6 +20,7 @@ const equipmentData = [
     condition: 'used',
     description: 'HD projector for presentations',
   },
+
   // Where we add all of our equipment data etc etc---- these are just examples
 
   {
