@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../utils/connection');
+const sequelize = require('../config/connection');
 
 const Reservation = sequelize.define('Reservation', {
   id: {
@@ -52,6 +52,12 @@ const Reservation = sequelize.define('Reservation', {
     allowNull: false,
     defaultValue: DataTypes.NOW,
   },
-});
+},
+{
+  sequelize,
+  freezeTableName: true,
+  modelName: 'reservation'
+},
+);
 
 module.exports = Reservation;
