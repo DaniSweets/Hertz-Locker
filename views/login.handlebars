@@ -1,51 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Page</title>
-</head>
-<body>
-  <div class="login-container">
-    <div class="login-form">
-      <h2>Login</h2>
-      <form id="login-form">
-        <div class="form-group">
-          <label for="email-login">Email:</label>
-          <input class="form-control" type="text" id="email-login" name="email" required />
-        </div>
-        <div class="form-group">
-          <label for="password-login">Password:</label>
-          <input class="form-control" type="password" id="password-login" name="password" required />
-        </div>
-        <div class="form-group">
-          <button class="btn btn-primary" type="submit">Login</button>
-        </div>
-      </form>
-    </div>
-
-    <div class="signup-form">
-      <h2>Signup</h2>
-      <form id="signup-form">
-        <div class="form-group">
-          <label for="name-signup">Username:</label>
-          <input class="form-control" type="text" id="name-signup" name="username" required />
-        </div>
-        <div class="form-group">
-          <label for="email-signup">Email:</label>
-          <input class="form-control" type="text" id="email-signup" name="email" required />
-        </div>
-        <div class="form-group">
-          <label for="password-signup">Password:</label>
-          <input class="form-control" type="password" id="password-signup" name="password" required />
-        </div>
-        <div class="form-group">
-          <button class="btn btn-success" type="submit">Signup</button>
-        </div>
-      </form>
-    </div>
+<div class="login-container">
+  <div class="login-form">
+    <h2>Login</h2>
+    <form id="login-form">
+      <div class="form-group">
+        <label for="email-login">Email:</label>
+        <input class="form-control" type="text" id="email-login" required />
+      </div>
+      <div class="form-group">
+        <label for="password-login">Password:</label>
+        <input class="form-control" type="password" id="password-login" required />
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary" type="submit">Login</button>
+      </div>
+    </form>
   </div>
 
-  <script src="./js/login.js"></script>
-</body>
-</html>
+  <div class="signup-form">
+    <h2>Signup</h2>
+    <form id="signup-form">
+      <div class="form-group">
+        <label for="name-signup">Username:</label>
+        <input class="form-control" type="text" id="name-signup" required />
+      </div>
+      <div class="form-group">
+        <label for="email-signup">Email:</label>
+        <input class="form-control" type="text" id="email-signup" required />
+      </div>
+      <div class="form-group">
+        <label for="password-signup">Password:</label>
+        <input class="form-control" type="password" id="password-signup" required />
+      </div>
+      <div class="form-group">
+        <button class="btn btn-success" type="submit">Signup</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="../public/login.js"></script>
