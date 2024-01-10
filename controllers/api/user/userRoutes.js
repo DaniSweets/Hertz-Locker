@@ -4,6 +4,7 @@ const authenticateUser = require('../../authController');
 
 // User login
 router.post('/login', authenticateUser, async (req, res) => {
+  console.log(req.body)
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
 
