@@ -1,5 +1,4 @@
 const Equipment = require('../models/equipment');
-const sequelize = require('../config/connection');
 
 const equipmentData = [
   {
@@ -86,70 +85,15 @@ const equipmentData = [
     condition: 'new',
     description: 'premium m (50ft) XLR cable',
   },
-  {
-    name: '',
-    status: '',
-    model: '',
-    manufacturer: '',
-    purchaseDate: '',
-    condition: '',
-    description: '',
-  },
-  {
-    name: '',
-    status: '',
-    model: '',
-    manufacturer: '',
-    purchaseDate: '',
-    condition: '',
-    description: '',
-  },
-  {
-    name: '',
-    status: '',
-    model: '',
-    manufacturer: '',
-    purchaseDate: '',
-    condition: '',
-    description: '',
-  },
-  {
-    name: '',
-    status: '',
-    model: '',
-    manufacturer: '',
-    purchaseDate: '',
-    condition: '',
-    description: '',
-  },
-  {
-    name: '',
-    status: '',
-    model: '',
-    manufacturer: '',
-    purchaseDate: '',
-    condition: '',
-    description: '',
-  },
-  {
-    name: '',
-    status: '',
-    model: '',
-    manufacturer: '',
-    purchaseDate: '',
-    condition: '',
-    description: '',
-  },
-  {
-    name: '',
-    status: '',
-    model: '',
-    manufacturer: '',
-    purchaseDate: '',
-    condition: '',
-    description: '',
-  },
-
+  // {
+  //   name: '',
+  //   status: '',
+  //   model: '',
+  //   manufacturer: '',
+  //   purchaseDate: '',
+  //   condition: '',
+  //   description: '',
+  // },
 
 ];
 

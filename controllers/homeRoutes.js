@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-// const reservation = require('../models/reservation');
+const Reservation = require('../models/reservation');
 
 router.get('/', async (req,res) => {
   res.render('homepage')
@@ -10,33 +10,44 @@ router.get('/login', async (req,res) => {
   res.render('login')
 });
 
-router.get('/calendar', async (req,res) => {
-  res.render('calendar')
-});
+// router.get('/calendar', async (req,res) => {
+//   res.render('calendar')
+// });
 
-router.get('/date', async (req,res) => {
-  res.render('dateinput')
-});
+// router.get('/date', async (req,res) => {
+//   res.render('dateinput')
+// });
 
-router.get('/manager', async (req,res) => {
-  res.render('managerdashboard')
-});
+// router.get('/manager', async (req,res) => {
+// //   res.render('managerdashboard')
+// // });
 
-router.get('/package', async (req,res) => {
-  res.render('packagebutton')
-});
+// // router.get('/package', async (req,res) => {
+//   res.render('packagebutton')
+// });
 
-router.get('/submit', async (req,res) => {
-  res.render('submitbutton')
-});
+// router.get('/submit', async (req,res) => {
+//   res.render('submitbutton')
+// });
 
-router.get('/user', async (req,res) => {
-  res.render('userDashboard')
-});
+// router.get('/user', async (req,res) => {
+//   res.render('userDashboard')
+//   console.log('Loading user page!')
+// });
 
 // router.get('/', async (req,res) => {
 //   res.render('')
 // });
+
+router.get('/reservations', async (req, res) => {
+  try {
+    const allReservations = await Reservation.findAll();
+    res.json(allReservations);
+  } catch (error) {
+    console.error('Error fetching reservations from the database:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 module.exports = router;
 
