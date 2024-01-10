@@ -3,10 +3,40 @@ const router = express.Router();
 // const reservation = require('../models/reservation');
 
 router.get('/', async (req,res) => {
-  // res.sendFile
-})
+  res.render('homepage')
+});
 
+router.get('/login', async (req,res) => {
+  res.render('login')
+});
 
+router.get('/calendar', async (req,res) => {
+  res.render('calendar')
+});
+
+router.get('/date', async (req,res) => {
+  res.render('dateinput')
+});
+
+router.get('/manager', async (req,res) => {
+  res.render('managerdashboard')
+});
+
+router.get('/package', async (req,res) => {
+  res.render('packagebutton')
+});
+
+router.get('/submit', async (req,res) => {
+  res.render('submitbutton')
+});
+
+router.get('/user', async (req,res) => {
+  res.render('userDashboard')
+});
+
+// router.get('/', async (req,res) => {
+//   res.render('')
+// });
 
 module.exports = router;
 
