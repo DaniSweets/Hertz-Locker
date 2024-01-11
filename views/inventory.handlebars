@@ -1,0 +1,17 @@
+<section class="section">
+    <h1 class="title">Inventory</h1>
+    <h2 class="subtitle">Here's everything we have right now!</h2>
+</section>
+<section class="section">
+    <ul class="content">
+        {{#each inventory}}
+        <li class="title is-5">{{manufacturer}} {{name}}
+            <ul class="content">
+                <li class="subtitle is-6">{{description}}</li>
+                <li class="subtitle is-6">Model #{{model}}.</li>
+                <li class="subtitle is-6">Purchased on {{purchaseDate}}.</li>
+            </ul>
+        </li>
+        {{/each}}
+    </ul>
+</section>

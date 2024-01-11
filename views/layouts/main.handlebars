@@ -4,29 +4,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hertz Locker </title>
+  <title>HERTZ - LOCKER</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"> 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 </head>
 
-<body>
-  <header>
-    <h1>
-      
-    </h1>
-    <nav class="navbar">
 
-    </nav>
+<body>
+    <header>
+
+
+      <span class="navbar-burger burger" data-target="navbarMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+  </div>
+  <div id="navbarMenu" class="navbar-menu">
+    <div class="navbar-end">
+      <span class="navbar-item">
+        <a class="button is-blue is-outlined" href="#">
+          <span class="icon">
+            <i class="temp"></i>
+          </span>
+          <span>Calendar</span>
+        </a>
+      </span>
+      <span class="navbar-item">
+        <a class="button is-blue is-outlined" href="/inventory">
+          <span class="icon">
+            <i class="temp"></i>
+          </span>
+          <span>Inventory</span>
+        </a>
+      </span>
+      <span class="navbar-item">
+        <a class="button is-blue is-outlined" href="/reservations">
+          <span class="icon">
+            <i class="temp"></i>
+          </span>
+          <span>Events</span>
+        </a>
+      </span>
+
+      </a>
+      </span>
+    </div>
+  </div>
+  </div>
+  </nav>
+  </div>
+
   </header>
   <main class="">
     {{{ body }}}
   </main>
   <footer>
+    <a href='/logout' class="button" id="logout">Logout</a>
   </footer>
-
-  <!-- Render script for logged in users only -->
- {{#if logged_in}}
-  <script src="logout.js"></script>
-  {{/if}}
 </body>
+
 </html>

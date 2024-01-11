@@ -1,0 +1,17 @@
+<section class="section">
+    <h1 class="title">Events</h1>
+    <h2 class="subtitle">Here are your saved events!</h2>
+</section>
+<section class="section">
+    <ul class="content">
+        {{#each reservations}}
+        <li class="title is-5">{{eventName}}
+            <ul class="content">
+                <li class="subtitle is-6">{{notes}}</li>
+                <li class="subtitle is-6">Starts on {{startTime}}.</li>
+                <li class="subtitle is-6">Ends on {{endTime}}.</li>
+            </ul>
+        </li>
+        {{/each}}
+    </ul>
+</section>
