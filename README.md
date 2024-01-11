@@ -32,7 +32,7 @@ To add a screenshot, create an `assets/images` folder in your repository and upl
 Dani Sweetwood
     https://github.com/DaniSweets
 
-Kayleena Bellow
+Kayleena Bellew
     https://github.com/KKBellew
 
 Sara McCauley
