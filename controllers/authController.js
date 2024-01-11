@@ -1,13 +1,14 @@
-const { User } = require('../models/User');
+const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const express = require('express');
 const router = express.Router();
+const sequelize = require('sequelize');
 
 const authenticateUser = async (req, res, next) => {
   const { username, password } = req.body;
 
   try {
-    const user = await User.findOne({ where: { username } });
+    const user = await User.findOne({ where: { email: username } });
 
     if (!user || !bcrypt.compareSync(password, user.password)) {
       return res.status(401).json({ error: 'Invalid credentials' });

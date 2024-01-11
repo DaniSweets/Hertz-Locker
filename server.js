@@ -6,6 +6,7 @@ const routes = require('./controllers/index');
 // const auth = require('./utils/auth');
 
 const sequelize = require('./config/connection');
+const router = require('./controllers/api/user/userRoutes');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const app = express();

@@ -1,12 +1,21 @@
 const express = require('express');
 const router = express.Router();
+const authenticateUser = require('./authController');
 const Reservation = require('../models/reservation');
 
 router.get('/', async (req,res) => {
+  if (!req.session.logged_in) {
+    res.redirect('/login');
+  } 
   res.render('homepage')
 });
 
+
+
 router.get('/login', async (req,res) => {
+  if (req.session.logged_in) {
+    res.redirect('/homepage');
+  } 
   res.render('login')
 });
 
@@ -39,38 +48,36 @@ router.get('/login', async (req,res) => {
 //   res.render('')
 // });
 
-router.get('/reservations', async (req, res) => {
-  try {
-    const allReservations = await Reservation.findAll();
-    res.json(allReservations);
-  } catch (error) {
-    console.error('Error fetching reservations from the database:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+// router.get('/reservations', authenticateUser, async (req, res) => {
+//   try {
+//     const allReservations = await Reservation.findAll();
+//     res.json(allReservations);
+//   } catch (error) {
+//     console.error('Error fetching reservations from the database:', error);
+//     res.status(500).json({ error: 'Internal Server Error' });
+//   }
+// });
+
+
+// Middleware to check if the user is authenticated
+
+const isAuthenticated = (req, res, next) => {
+  if (req.user) {
+    next();
+  } else {
+    res.status(401).json({ error: 'Unauthorized' });
   }
-});
+};
 
-module.exports = router;
+// Middleware to check if the user is a manager
 
-
-// // Middleware to check if the user is authenticated
-
-// const isAuthenticated = (req, res, next) => {
-//   if (req.user) {
-//     next();
-//   } else {
-//     res.status(401).json({ error: 'Unauthorized' });
-//   }
-// };
-
-// // Middleware to check if the user is a manager
-
-// const isManager = (req, res, next) => {
-//   if (req.user && req.user.role === 'manager') {
-//     next();
-//   } else {
-//     res.status(403).json({ error: 'Forbidden' });
-//   }
-// };
+const isManager = (req, res, next) => {
+  if (req.user && req.user.role === 'manager') {
+    next();
+  } else {
+    res.status(403).json({ error: 'Forbidden' });
+  }
+};
 
 // // Route for fetching all gigs (accessible only by managers)
 
@@ -126,3 +133,5 @@ module.exports = router;
 //     res.status(500).json({ error: 'Internal Server Error' });
 //   }
 // });
+
+module.exports = router;

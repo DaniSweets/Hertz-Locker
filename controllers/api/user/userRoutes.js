@@ -1,30 +1,27 @@
 const router = require('express').Router();
 const User = require('../../../models/User');
-const authenticateUser = require('../../authController'); 
+const authenticateUser = require('../../authController');
+const bcrypt = require('bcrypt');
 
 // User login
-router.post('/login', authenticateUser, async (req, res) => {
+router.post('/login', async (req, res) => {
   console.log(req.body)
   try {
-    const userData = await User.findOne({ where: { email: req.body.email } });
+    const userData = await User.findOne({ where: { email: req.body.username } });
+    let userPw = userData.getDataValue("password");
+    const validPassword = await bcrypt.compare(req.body.password, userPw);
 
-    if (!userData) {
-      res.status(400).json({ message: 'Incorrect email or password, please try again' });
-      return;
-    }
-
-    const validPassword = await userData.checkPassword(req.body.password);
-
+    console.log(`isValidPassword: ${validPassword}`);
     if (!validPassword) {
       res.status(400).json({ message: 'Incorrect email or password, please try again' });
       return;
     }
-
+    console.log('saving session')
     // Once the user successfully logs in, set up the sessions variable 'loggedIn'
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
-      
+
       res.json({ user: userData, message: 'You are now logged in!' });
     });
 
