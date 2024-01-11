@@ -18,7 +18,7 @@ const Reservation = sequelize.define('Reservation', {
     allowNull: false,
   },
   // Additional fields for reservation details
-  bandName: {
+  eventName: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -28,12 +28,7 @@ const Reservation = sequelize.define('Reservation', {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  // Status of the reservation (e.g., pending, approved, canceled)
-  status: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    defaultValue: 'pending',
-  },
+
   // Manager's notes or comments about the reservation
   notes: {
     type: DataTypes.TEXT,
