@@ -1,12 +1,13 @@
 const router = require('express').Router();
 const User = require('../../../models/User');
-const authenticateUser = require('../../authController');
+// const authenticateUser = require('../../authController');
 const bcrypt = require('bcrypt');
 
 // User login
 router.post('/login', async (req, res) => {
   console.log(req.body)
   try {
+    // throw('pizza');
     const userData = await User.findOne({ where: { email: req.body.username } });
     let userPw = userData.getDataValue("password");
     const validPassword = await bcrypt.compare(req.body.password, userPw);
@@ -27,6 +28,8 @@ router.post('/login', async (req, res) => {
 
   } catch (err) {
     res.status(400).json(err);
+    console.error(err);
+    // throw(err);
   }
 });
 
