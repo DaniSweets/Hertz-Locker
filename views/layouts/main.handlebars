@@ -1,34 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HERTZ - LOCKER</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  </head>
+  
+  <body>
+    <section class="hero is-info is-fullheight">
+        <div class="hero-head">
+            <nav class="navbar">
+                <div class="container">
+                    <div class="navbar-brand">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>sup homies </title>
-  <link rel="stylesheet" href="../../public/style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"> 
-</head>
+                        <span class="navbar-burger burger" data-target="navbarMenu">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                    </div>
+                    <div id="navbarMenu" class="navbar-menu">
+                        <div class="navbar-end">
+                            <span class="navbar-item">
+                                <a class="button is-blue is-outlined" href="#">
+                                    <span class="icon">
+                                        <i class="temp"></i>
+                                    </span>
+                                    <span>Calender</span>
+                                </a>
+                            </span>
+                            <span class="navbar-item">
+                                <a class="button is-blue is-outlined" href="#">
+                                    <span class="icon">
+                                        <i class="temp"></i>
+                                    </span>
+                                    <span>Inventory</span>
+                                </a>
+                            </span>
+                            <span class="navbar-item">
+                                <a class="button is-blue is-outlined" href="#">
+                                    <span class="icon">
+                                        <i class="temp"></i>
+                                    </span>
+                                    <span>Accounts</span>
+                                </a>
+                            </span>
 
-<body>
-  <header>
-    <h1>
-      
-    </h1>
-    <nav class="navbar">
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            </div>
 
-    </nav>
-  </header>
-  <main class="">
-    {{{ body }}}
-  </main>
-  <footer>
-    {{!-- stuff goes blah blah  --}}
-  </footer>
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                    <div class="column is-6 is-offset-3">
+                        <h1 class="title">
+                            HERTZ - LOCKER
+                        </h1>
+                        <h2 class="subtitle">
+                            We schedule equipment rentals and offer a wide range of equipment for a verity of needs and situations 
+                        </h2>
+                          <nav>               
+                          {{#if logged_in}}
+                          <button class="no-button" id="logout">logout</button>
+                          {{else}}
+                          <a href="/login">Sign - In</a>
+                          {{/if}}
+                          </nav>
+                          <main>
+                                {{{ body }}}
+                          </main>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-  <!-- Render script for logged in users only -->
-  {{!-- {{#if logged_in}}
-  <script src="/public/logout.js"></script>
-  {{/if}} --}}
+    </section>
 </body>
-
 </html>
