@@ -17,9 +17,15 @@ router.get('/login', async (req,res) => {
   res.render('login')
 });
 
-// router.get('/calendar', async (req,res) => {
-//   res.render('calendar')
-// });
+router.get('/calendar', withAuth, async (req,res) => {
+  try {
+    const allReservations = (await Reservation.findAll()).map(record => record.toJSON());
+    res.render('calendar', {reservations: JSON.stringify(allReservations)});
+  } catch (error) {
+    console.error('Error fetching reservations from the database:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 // router.get('/date', async (req,res) => {
 //   res.render('dateinput')
