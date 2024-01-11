@@ -65,12 +65,16 @@
                         <h2 class="subtitle">
                             We schedule equipment rentals and offer a wide range of equipment for a verity of needs and situations 
                         </h2>
-                        <div class="box">
-                            <div class="field is-grouped">
-                                <p class="control is-expanded">
-                                    <input class="input" type="text" placeholder="login goes here">
-                                </p>
-                            </div>
+                          <nav>               
+                          {{#if logged_in}}
+                          <button class="no-button" id="logout">logout</button>
+                          {{else}}
+                          <a href="/login">Sign - In</a>
+                          {{/if}}
+                          </nav>
+                          <main>
+                                {{{ body }}}
+                          </main>
                         </div>
                     </div>
                 </div>
