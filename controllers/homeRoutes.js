@@ -1,12 +1,19 @@
 const express = require('express');
 const router = express.Router();
+const equipment = require('../models/equipment')
 const Reservation = require('../models/reservation');
+const withAuth = require('../utils/auth');
 
-router.get('/', async (req,res) => {
+router.get('/', withAuth, async (req,res) => {
   res.render('homepage')
 });
 
+
+
 router.get('/login', async (req,res) => {
+  if (req.session.logged_in) {
+    res.redirect('/');
+  } 
   res.render('login')
 });
 
@@ -39,20 +46,28 @@ router.get('/login', async (req,res) => {
 //   res.render('')
 // });
 
-router.get('/reservations', async (req, res) => {
+router.get('/reservations', withAuth, async (req, res) => {
   try {
-    const allReservations = await Reservation.findAll();
-    res.json(allReservations);
+    const allReservations = (await Reservation.findAll()).map(record => record.toJSON());
+    res.render('reservations', {reservations: allReservations});
   } catch (error) {
     console.error('Error fetching reservations from the database:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
-module.exports = router;
+router.get('/inventory', withAuth, async (req, res) => {
+  try {
+    const inventory = (await equipment.findAll()).map(record => record.toJSON());
+    res.render('inventory', {inventory: inventory});
+  } catch (error) {
+    console.error('Error fetching inventory:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 
-// // Middleware to check if the user is authenticated
+// Middleware to check if the user is authenticated
 
 // const isAuthenticated = (req, res, next) => {
 //   if (req.user) {
@@ -62,7 +77,7 @@ module.exports = router;
 //   }
 // };
 
-// // Middleware to check if the user is a manager
+// Middleware to check if the user is a manager
 
 // const isManager = (req, res, next) => {
 //   if (req.user && req.user.role === 'manager') {
@@ -126,3 +141,5 @@ module.exports = router;
 //     res.status(500).json({ error: 'Internal Server Error' });
 //   }
 // });
+
+module.exports = router;
