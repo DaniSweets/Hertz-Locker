@@ -2,13 +2,6 @@ const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection.js');
 
-class User extends Model {
-  // Method to check the entered password against the hashed password in the database
-  checkPassword(loginPw) {
-    return bcrypt.compareSync(loginPw, this.password);
-  }
-}
-
 User = sequelize.define('User',
   {
     // Define the user model attributes

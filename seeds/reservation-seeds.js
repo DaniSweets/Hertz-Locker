@@ -7,7 +7,7 @@ const reservationData = [
     endTime: '2023-01-15T10:00:00',
     eventName: 'Wedding',
     equipmentId: 1, // ID of the associated equipment
-    notes: 'First reservation for the laptop',
+    notes: 'Laptop needed for DJ',
   },
   {
     startTime: '2023-02-01T14:00:00',
